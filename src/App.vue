@@ -1,30 +1,37 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import { darkTheme, dateZhCN, lightTheme, NButton, NConfigProvider, NLayout, NSpace, useOsTheme, zhCN } from 'naive-ui'
+import { AppProvider } from '@/components/Application'
+
+const osThemeRef = useOsTheme()
+const isDarkTheme = ref(osThemeRef.value === 'dark')
+const theme = computed(() => isDarkTheme.value ? darkTheme : lightTheme)
+watch(osThemeRef, () => {
+  isDarkTheme.value = osThemeRef.value === 'dark'
+})
+const toggleTheme = () => {
+  isDarkTheme.value = !isDarkTheme.value
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <NConfigProvider
+      :date-locale="dateZhCN"
+      :locale="zhCN"
+      :theme="theme"
+  >
+
+    <AppProvider>
+      <n-layout class="full-height">
+        <n-space align="center" justify="space-around">
+          <n-button type="primary" @click="toggleTheme">切换主题</n-button>
+        </n-space>
+      </n-layout>
+    </AppProvider>
+  </NConfigProvider>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style lang="less" scoped>
+.full-height {
+  height: 100vh;
 }
 </style>
