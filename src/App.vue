@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { darkTheme, dateZhCN, lightTheme, NButton, NConfigProvider, NLayout, NSpace, useOsTheme, zhCN } from 'naive-ui'
+import { dateZhCN, zhCN } from 'naive-ui'
 import { AppProvider } from '@/components/Application'
 
 const osThemeRef = useOsTheme()
@@ -21,6 +21,7 @@ const toggleTheme = () => {
   >
 
     <AppProvider>
+      <!--      <RouterView />-->
       <n-layout class="full-height">
         <n-space align="center" justify="space-around">
           <n-button type="primary" @click="toggleTheme">切换主题</n-button>

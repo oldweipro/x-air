@@ -26,6 +26,8 @@ dist-ssr
 *-lock.json
 *.lock
 *.d.ts
+auto-imports.d.ts
+components.d.ts
 *-lock.yaml
 dist/
 .pnpm-debug.log
