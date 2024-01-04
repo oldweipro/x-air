@@ -19,14 +19,8 @@ const toggleTheme = () => {
       :locale="zhCN"
       :theme="theme"
   >
-
     <AppProvider>
-      <!--      <RouterView />-->
-      <n-layout class="full-height">
-        <n-space align="center" justify="space-around">
-          <n-button type="primary" @click="toggleTheme">切换主题</n-button>
-        </n-space>
-      </n-layout>
+      <RouterView />
     </AppProvider>
   </NConfigProvider>
 </template>
