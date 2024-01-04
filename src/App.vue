@@ -26,7 +26,4 @@ const toggleTheme = () => {
 </template>
 
 <style lang="less" scoped>
-.full-height {
-  height: 100vh;
-}
 </style>

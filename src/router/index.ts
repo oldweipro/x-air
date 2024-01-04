@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { App } from 'vue'
+import { createRouterGuards } from '@/router/guards.ts'
+
+//需要验证权限
+export const asyncRoutes = []
 
 const RedirectName = 'Redirect'
 export const RedirectRoute: RouteRecordRaw = {
@@ -17,6 +21,26 @@ export const RedirectRoute: RouteRecordRaw = {
       component: () => import('@/views/redirect/index.vue'),
       meta: {
         title: RedirectName,
+        hideBreadcrumb: true,
+      },
+    },
+  ],
+}
+export const ErrorPageRoute: RouteRecordRaw = {
+  path: '/:path(.*)*',
+  name: 'ErrorPage',
+  component: () => import('@/layout/index.vue'),
+  meta: {
+    title: 'ErrorPage',
+    hideBreadcrumb: true,
+  },
+  children: [
+    {
+      path: '/:path(.*)*',
+      name: 'ErrorPageSon',
+      component: () => import('@/views/exception/404.vue'),
+      meta: {
+        title: 'ErrorPage',
         hideBreadcrumb: true,
       },
     },
@@ -51,7 +75,7 @@ const router = createRouter({
 export function setupRouter(app: App) {
   app.use(router)
   // 创建路由守卫
-  // createRouterGuards(router);
+  createRouterGuards(router)
 }
 
 export default router
