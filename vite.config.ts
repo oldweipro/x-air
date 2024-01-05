@@ -19,6 +19,8 @@ export default defineConfig({
             'lightTheme',
             'darkTheme',
             'useMessage',
+            'useDialog',
+            'useThemeVars',
           ],
         },
       ],
