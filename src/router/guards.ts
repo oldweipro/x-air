@@ -23,7 +23,6 @@ export function createRouterGuards(router: Router) {
       next()
       return
     }
-
     // 这里的token决定了是否登陆，如果token为空则进入登录页
     const token = "1111"
 
@@ -66,7 +65,7 @@ export function createRouterGuards(router: Router) {
     //添加404
     const isErrorPage = router.getRoutes().findIndex((item) => item.name === ErrorPageRoute.name)
     if (isErrorPage === -1) {
-      router.addRoute(ErrorPageRoute as unknown as RouteRecordRaw)
+      router.addRoute(ErrorPageRoute)
     }
 
     const redirectPath = (from.query.redirect || to.path) as string

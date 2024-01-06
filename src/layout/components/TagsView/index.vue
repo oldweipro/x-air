@@ -30,7 +30,7 @@
           </n-icon>
         </span>
         <div ref="navScroll" class="tabs-card-scroll">
-          <Draggable :list="tabsList" animation="300" class="flex" item-key="fullPath">
+          <Draggable :list="tabsList as unknown[]" animation="300" class="flex" item-key="fullPath">
             <template #item="{ element }">
               <div
                   :id="`tag${element.fullPath.split('/').join('\/')}`"
@@ -230,7 +230,7 @@ function onScroll(e) {
       document.documentElement.scrollTop ||
       window.pageYOffset ||
       document.body.scrollTop // 滚动条偏移量
-  state.isMultiHeaderFixed = !!(
+  state.isMultiHeaderFixed = (
       !headerSetting.value.fixed &&
       multiTabsSetting.value.fixed &&
       scrollTop >= 64

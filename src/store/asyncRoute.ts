@@ -62,6 +62,8 @@ export const useAsyncRouteStore = defineStore({
       }
       // 动态获取菜单
       accessedRouters = await generateDynamicRoutes()
+      // 固定路由
+      // accessedRouters = filter(asyncRoutes, routeFilter)
       accessedRouters = accessedRouters.filter(routeFilter)
       this.setRouters(accessedRouters)
       this.setMenus(accessedRouters)
@@ -73,4 +75,38 @@ export const useAsyncRouteStore = defineStore({
 // Need to be used outside the setup
 export function useAsyncRoute() {
   return useAsyncRouteStore(store)
+}
+
+interface TreeHelperConfig {
+  id: string;
+  children: string;
+  pid: string;
+}
+
+const DEFAULT_CONFIG: TreeHelperConfig = {
+  id: 'id',
+  children: 'children',
+  pid: 'pid',
+}
+
+const getConfig = (config: Partial<TreeHelperConfig>) => Object.assign({}, DEFAULT_CONFIG, config)
+
+function filter<T = any>(
+  tree: T[],
+  func: (n: T) => boolean,
+  config: Partial<TreeHelperConfig> = {}
+): T[] {
+  config = getConfig(config)
+  const children = config.children as string
+
+  function listFilter(list: T[]) {
+    return list
+    .map((node: any) => ({...node}))
+    .filter((node) => {
+      node[children] = node[children] && listFilter(node[children])
+      return func(node) || (node[children] && node[children].length)
+    })
+  }
+
+  return listFilter(tree)
 }

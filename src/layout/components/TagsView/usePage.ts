@@ -16,11 +16,10 @@ function handleError(e: Error) {
  * 页面切换
  */
 export function useGo(_router?: Router) {
-  let router
   if (!_router) {
-    router = useRouter()
+    _router = useRouter()
   }
-  const {push, replace} = _router || router
+  const {push, replace} = _router
 
   function go(opt: PageEnum | RouteLocationRawEx | string = PageEnum.BASE_HOME, isReplace = false) {
     if (!opt) {

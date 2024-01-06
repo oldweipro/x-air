@@ -4,18 +4,7 @@
     <div
         v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)"
         class="layout-header-left"
-    >
-      <div v-if="navMode === 'horizontal'" class="logo">
-        <img alt="" src="@/assets/vite.svg" />
-        <h2 v-show="!collapsed" class="title">网站名称</h2>
-      </div>
-      <AsideMenu
-          :collapsed="collapsed"
-          :inverted="getInverted"
-          :location="getMenuLocation"
-          mode="horizontal"
-      />
-    </div>
+    ></div>
     <!--左侧菜单-->
     <div v-else class="layout-header-left">
       <!-- 菜单收起 -->
@@ -97,6 +86,16 @@
           <span>全屏</span>
         </n-tooltip>
       </div>
+      <div class="layout-header-trigger layout-header-trigger-min" @click="message.info('项目配置')">
+        <n-tooltip placement="bottom-end">
+          <template #trigger>
+            <n-icon size="18" style="font-weight: bold">
+              <SettingOutlined />
+            </n-icon>
+          </template>
+          <span>项目配置</span>
+        </n-tooltip>
+      </div>
       <!-- 个人中心 -->
       <div class="layout-header-trigger layout-header-trigger-min">
         <n-dropdown :options="avatarOptions" trigger="hover" @select="avatarSelect">
@@ -126,7 +125,6 @@
 </template>
 
 <script lang="ts" setup>
-import { AsideMenu } from '@/layout/components/Menu'
 import { useProjectSetting } from '@/layout/useProjectSetting'
 import { MenuFoldOutlined, MenuUnfoldOutlined, ReloadOutlined, SettingOutlined, UserOutlined, } from '@vicons/antd'
 

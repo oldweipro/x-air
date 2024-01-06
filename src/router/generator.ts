@@ -2,6 +2,7 @@
 import { RouteRecordRaw } from 'vue-router'
 import type { AppRouteRecordRaw } from '@/router/types'
 import { Layout, ParentLayout } from '@/constant/router-constant'
+import { constantRouterIcon } from '@/router/icons.ts'
 
 const Iframe = () => import('@/views/iframe/index.vue')
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>()
@@ -29,7 +30,7 @@ export const generateRoutes = (routerMap: any, parent?: any): any[] => {
       meta: {
         ...item.meta,
         label: item.meta.title,
-        // icon: constantRouterIcon[item.meta.icon],
+        icon: constantRouterIcon[item.meta.icon] ?? null,
         permissions: item.meta.permissions || null,
       },
     }
@@ -58,7 +59,7 @@ export const generateDynamicRoutes = async (): Promise<RouteRecordRaw[]> => {
   const result = [
     {
       "path": "/dashboard",
-      "name": "Dashboard",
+      "name": "dashboard",
       "component": "LAYOUT",
       "redirect": "/dashboard/console",
       "meta": {

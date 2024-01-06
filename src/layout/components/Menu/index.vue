@@ -39,7 +39,7 @@ const matched = currentRoute.matched
 
 const getOpenKeys = matched && matched.length ? matched.map((item) => item.name) : []
 
-const state = reactive({
+const state: any = reactive({
   openKeys: getOpenKeys,
 })
 
